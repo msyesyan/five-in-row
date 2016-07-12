@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-10">
+    <div id="chessboard" class="chessboard">
+    </div>
+  </div>
+  <div class="col-md-2">
+    <ul id="list-users" class="list-group">
+      <% @users.each do |user| %>
+      <li class="list-group-item" data-user-id="<%= user.id %>">
+        <icon class="user-status user-status-<%= user.status %>"></icon><%= user.email %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var COLUMNS = 30;
+    var COLORS = ['white', 'black'];
+    var chessboard = $('#chessboard');
+    var cellWidth = Math.floor(chessboard.width() / COLUMNS);
+
+    drawChessboard();
+
+    $('.cell').click(function() {
+      if (!$(this).hasClass('active')) {
+        var color = COLORS.pop();
+        COLORS.unshift(color);
+        $(this).addClass('active active-' + color);
+      }
+    });
+
+    function drawChessboard() {
+      for (var i = 0; i < COLUMNS; i++) {
+        var row = $('<div class="chessboard-row"></div>');
+        for (var j = 0; j < COLUMNS; j++) {
+         $('<div class="cell">').css({
+          'width': cellWidth - 2 + 'px',
+          'height': cellWidth - 2 + 'px'
+         }).appendTo(row);
+        }
+        row.appendTo(chessboard);
+      }
+    }
+  })();
+
+</script>
