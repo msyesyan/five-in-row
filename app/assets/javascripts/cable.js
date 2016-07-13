@@ -3,6 +3,7 @@
 //= require_tree ./channels
 
 (function() {
-  this.App = this.App || {};
+  'use strict';
+
   App.cable = ActionCable.createConsumer();
 })();

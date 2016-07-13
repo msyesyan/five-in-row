@@ -11,38 +11,17 @@
       </li>
       <% end %>
     </ul>
+    <button id="btn-start" class="disabled" disabled>StartGame</button>
   </div>
 </div>
 
 <script>
-  (function(){
-    var COLUMNS = 30;
-    var COLORS = ['white', 'black'];
-    var chessboard = $('#chessboard');
-    var cellWidth = Math.floor(chessboard.width() / COLUMNS);
-
-    drawChessboard();
-
-    $('.cell').click(function() {
-      if (!$(this).hasClass('active')) {
-        var color = COLORS.pop();
-        COLORS.unshift(color);
-        $(this).addClass('active active-' + color);
-      }
-    });
-
-    function drawChessboard() {
-      for (var i = 0; i < COLUMNS; i++) {
-        var row = $('<div class="chessboard-row"></div>');
-        for (var j = 0; j < COLUMNS; j++) {
-         $('<div class="cell">').css({
-          'width': cellWidth - 2 + 'px',
-          'height': cellWidth - 2 + 'px'
-         }).appendTo(row);
-        }
-        row.appendTo(chessboard);
-      }
-    }
-  })();
-
+  App.PlayerStore.fetch();
+  App.chessboard = new App.Chessboard({
+    columns: 30,
+    element: $('#chessboard')
+  });
+  $('#btn-start').click(function() {
+    App.game_wathcher.start();
+  });
 </script>

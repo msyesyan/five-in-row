@@ -28,3 +28,8 @@ group :development do
   # gem 'spring'
   # gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-lodash'
+  gem 'rails-assets-bootstrap'
+end
