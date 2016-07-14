@@ -1,7 +1,7 @@
 .chessboard {
   padding: 2%;
   border: 1px solid black;
-  background: yellow;
+  background: image-url('chessboard-bg.png');
 }
 .chessboard-row {
   display: flex;
@@ -56,11 +56,13 @@
   }
 
   &.active-white {
-    background: #f0f0f0;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 220, 1) 0%, #fff 100%);
+    box-shadow: inset -25px -25px 40px rgba(125, 116, 116, 0.5);
   }
 
   &.active-black {
-    background: black;
+    box-shadow: inset -25px -25px 40px rgba(0, 0, 0, 0.5);
+    background-image: -webkit-linear-gradient(-45deg, rgba(181, 174, 174, 0.8) 0%, #000 100%);
   }
 }
 #btn-start {
