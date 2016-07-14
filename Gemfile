@@ -22,8 +22,8 @@ gem 'capistrano-rbenv'
 gem 'capistrano-rails'
 
 
-group :development, :test do
   gem 'pry'
+group :development, :test do
 end
 
 group :development do

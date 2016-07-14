@@ -5,5 +5,5 @@
 (function() {
   'use strict';
 
-  App.cable = ActionCable.createConsumer();
+  App.cable = ActionCable.createConsumer('/cable');
 })();
