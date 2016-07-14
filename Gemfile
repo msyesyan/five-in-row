@@ -21,9 +21,12 @@ gem 'capistrano'
 gem 'capistrano-rbenv'
 gem 'capistrano-rails'
 
+gem 'therubyracer'
+gem 'execjs'
 
-  gem 'pry'
+
 group :development, :test do
+  gem 'pry'
 end
 
 group :development do
