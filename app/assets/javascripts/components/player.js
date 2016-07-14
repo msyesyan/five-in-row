@@ -8,9 +8,11 @@
 
   App.Player.prototype.move = function(piece) {
     if (this.isActive()) {
+      this.disactivate();
       piece = $(piece);
       piece.addClass('active active-' + this.color);
       this.pieces.push(piece);
+      App.game_wathcher.move({x_index: piece.data('xIndex'), y_index: piece.data('yIndex')});
     }
   };
 

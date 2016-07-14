@@ -2,21 +2,19 @@ App.game_wathcher = App.cable.subscriptions.create('GameWathcherChannel', {
   connected: function() {
     console.log('game_wathcher connected');
   },
-
   disconnected: function() {
     console.log('game_wathcher disconnected');
   },
-
   received: function(data) {
-    if (data.player_id) {
-      if (data.player_id === App.getCurrentUser().id) {
-        _.find(App.chessboard.players, {id: data.player_id}).activate();
-      }
-    } else {
+    if (data.action === 'start') {
       App.chessboard.startGame(data);
     }
+    if (data.action === 'move') {
+      var piecePlayer = _.find(App.chessboard.players, {id: data.player_id});
+      _.find(App.chessboard.players, {id: data.turn_player_id}).activate();
+      App.chessboard.pieces[data.piece.y_index][data.piece.x_index].addClass('active active-' + piecePlayer.color);
+    }
   },
-
   start: function() {
     var offensivePlayerId = App.getCurrentUser().id;
     var defensivePlayerId = offensivePlayerId === 1 ? 2 : 1;
@@ -26,10 +24,11 @@ App.game_wathcher = App.cable.subscriptions.create('GameWathcherChannel', {
       defensive_player_id: defensivePlayerId
     });
   },
-
-  turnPlayer: function(playerId) {
-    this.perform('turn_player', {
-      player_id: playerId
+  move: function(piece) {
+    this.perform('move', {
+      player_id: App.getCurrentUser().id,
+      turn_player_id: App.chessboard.matchPlayer.id,
+      piece: piece
     });
   }
 });

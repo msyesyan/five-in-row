@@ -7,15 +7,19 @@ class GameWathcherChannel < ApplicationCable::Channel
   def start(data)
     ActionCable.server.broadcast(
       'game_wathcher',
+      action: 'start',
       offensive_player_id: data['offensive_player_id'],
       defensive_player_id: data['defensive_player_id']
     )
   end
 
-  def turn_player(data)
+  def move(data)
     ActionCable.server.broadcast(
       'game_wathcher',
-      player_id: data['player_id']
+      action: 'move',
+      player_id: data['player_id'],
+      turn_player_id: data['turn_player_id'],
+      piece: data['piece']
     )
   end
 end
