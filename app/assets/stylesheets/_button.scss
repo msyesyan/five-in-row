@@ -1,0 +1,20 @@
+#btn-return {
+  @extend .btn;
+  @extend .btn-default;
+  @extend .btn-block;
+}
+#btn-start {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-block;
+}
+#btn-back {
+  @extend .btn;
+  @extend .btn-default;
+  @extend .btn-block;
+}
+#btn-save {
+  @extend .btn;
+  @extend .btn-default;
+  @extend .btn-block;
+}

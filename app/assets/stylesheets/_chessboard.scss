@@ -3,12 +3,37 @@
   border: 1px solid black;
   background: image-url('chessboard-bg.png');
 }
+
+.players {
+  height: 6rem;
+  line-height: 6rem;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+
+  .player {
+    width: 30%;
+    margin-left: 3rem;
+    position: relative;
+    padding-left: 4rem;
+    text-overflow: ellipsis;
+  }
+
+  .user-status {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 2.2rem;
+    left: 1rem;
+  }
+}
+
 .chessboard-row {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
 }
-.chessboard-row:nth-child(1) .cell::before {
+.chessboard-row:nth-child(2) .cell::before{
   top: 50%;
 }
 .chessboard-row:nth-last-child(1) .cell::before {
@@ -64,9 +89,4 @@
     box-shadow: inset -25px -25px 40px rgba(0, 0, 0, 0.5);
     background-image: -webkit-linear-gradient(-45deg, rgba(181, 174, 174, 0.8) 0%, #000 100%);
   }
-}
-#btn-start {
-  @extend .btn;
-  @extend .btn-primary;
-  @extend .btn-block;
 }
