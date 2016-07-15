@@ -1,4 +1,3 @@
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -17,7 +16,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = true#ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -42,8 +41,9 @@ Rails.application.configure do
   # Action Cable endpoint configuration
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  config.action_cable.url = 'ws://yolande.me/cable'
-  config.action_cable.allowed_request_origins = [ 'http://yolande.me', /http:\/\/yolande.*/ ]
+  action_cable_uri = URI.parse(ENV['ACTION_CABLE_URL'])
+  config.action_cable.url = action_cable_uri.to_s
+  config.action_cable.allowed_request_origins = [%r{#{action_cable_uri.scheme}:\/\/#{action_cable_uri.host}.*}]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -53,13 +53,13 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
   end
 
